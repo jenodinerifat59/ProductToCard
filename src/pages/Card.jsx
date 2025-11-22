@@ -1,6 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { productProvider } from '../contex/CardContex'
+
 
 const Card = () => {
+    let {cardProduct,setCardProduct} = useContext(productProvider)
+    
+    let totalPrice= cardProduct.reduce((prev,curr)=>{
+      return prev + curr.price
+    },0)
+    let tax=0
+     tax=Math.round((totalPrice*5)/100)
+
+    let shoping = cardProduct.length
+     
+
+      let handleRemove=(deitem)=>{
+       
+        const botton=cardProduct.filter(function(item){
+            return item!==deitem
+            
+        });
+        setCardProduct(botton)
+      };
+   
     return (
         <div>
             <div className="grid lg:grid-cols-3">
@@ -9,7 +31,7 @@ const Card = () => {
                         <h2 className="text-xl font-semibold text-slate-900 flex-1">
                             Shopping Cart
                         </h2>
-                        <h4 className="text-base text-slate-900 font-medium">4 Items</h4>
+                        <h4 className="text-base text-slate-900 font-medium">{shoping} Items</h4>
                     </div>
                     <table className="mt-6 w-full border-collapse divide-y divide-gray-300">
                         <thead className="whitespace-nowrap text-left">
@@ -24,20 +46,22 @@ const Card = () => {
                             </tr>
                         </thead>
                         <tbody className="whitespace-nowrap divide-y divide-gray-300">
-                            <tr>
+                           {
+                            cardProduct.map((item)=>(
+                                 <tr>
                                 <td className="p-4">
                                     <div className="flex items-center gap-4 w-max">
                                         <div className="w-24 h-24 shrink-0">
                                             <img
-                                                src="https://readymadeui.com/images/sunscreen-img-1.webp"
+                                                src={item.image}
                                                 className="w-full h-full object-contain"
                                             />
                                         </div>
                                         <div>
                                             <h4 className="text-base font-medium text-slate-900">
-                                                Sunscreen
+                                               {item.title}
                                             </h4>
-                                            <button
+                                            <button onClick={()=>handleRemove(item)}
                                                 type="button"
                                                 className="mt-3 font-medium text-red-500 text-sm cursor-pointer"
                                             >
@@ -88,9 +112,11 @@ const Card = () => {
                                     </div>
                                 </td>
                                 <td className="p-4">
-                                    <h4 className="text-base font-semibold text-slate-900">$18.00</h4>
+                                    <h4 className="text-base font-semibold text-slate-900">${item.price}</h4>
                                 </td>
                             </tr>
+                            ))
+                           }
                         </tbody>
                     </table>
                 </div>
@@ -101,18 +127,18 @@ const Card = () => {
                     <ul className="text-slate-500 font-medium divide-y divide-gray-300 mt-6">
                         <li className="flex flex-wrap gap-4 text-base py-3">
                             Subtotal{" "}
-                            <span className="ml-auto font-semibold text-slate-900">$88.00</span>
+                            <span className="ml-auto font-semibold text-slate-900">${totalPrice}</span>
                         </li>
                         <li className="flex flex-wrap gap-4 text-base py-3">
                             Shipping{" "}
-                            <span className="ml-auto font-semibold text-slate-900">$4.00</span>
+                            <span className="ml-auto font-semibold text-slate-900">{shoping}</span>
                         </li>
                         <li className="flex flex-wrap gap-4 text-base py-3">
                             Tax{" "}
-                            <span className="ml-auto font-semibold text-slate-900">$4.00</span>
+                            <span className="ml-auto font-semibold text-slate-900">${tax}</span>
                         </li>
                         <li className="flex flex-wrap gap-4 text-base py-3 font-semibold text-slate-900">
-                            Total <span className="ml-auto">$96.00</span>
+                            Total <span className="ml-auto">${totalPrice + tax}</span>
                         </li>
                     </ul>
                     <button

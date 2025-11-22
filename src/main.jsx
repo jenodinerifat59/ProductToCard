@@ -7,6 +7,7 @@ import { RouterProvider } from "react-router/dom";
 import Rootlayot from './layout/Rootlayot.jsx';
 import Product from './pages/Product.jsx';
 import Card from './pages/Card.jsx';
+import CardContex from './contex/CardContex.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <CardContex>
   <RouterProvider router={router} />,
-  </StrictMode>,
+  </CardContex>,
 )
