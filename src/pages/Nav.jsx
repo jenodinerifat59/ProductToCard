@@ -5,7 +5,7 @@ const Nav = () => {
     let {pathname}=useLocation()
     return (
         <header className="flex justify-between border-b border-gray-300 py-3 px-4 sm:px-10 bg-white min-h-[65px] tracking-wide relative z-50">
-            <div className="flex flex-wrap items-center gap-4 max-w-screen-xl mx-auto w-full">
+            <div className="flex justify-between flex-wrap items-center gap-4 max-w-screen-xl mx-auto w-full">
                 <Link to="/"> 
                     <div className='flex items-center gap-2'>
 <img
@@ -30,7 +30,6 @@ const Nav = () => {
                    
                 </div>
                 
-            </div>
               <ul className="lg:flex lg:ml-14 lg:gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
                         <li className="mb-6 hidden max-lg:block">
                             <a href="javascript:void(0)">
@@ -65,6 +64,7 @@ const Nav = () => {
                         </li>
                        
                     </ul>
+            </div>
         </header>
 
     )
